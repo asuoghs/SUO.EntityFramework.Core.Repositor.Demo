@@ -45,11 +45,11 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=MyNetCoreProjectFrom;User ID=sa;Password=sasasa;MultipleActiveResultSets=true");
-            //if (!optionsBuilder.IsConfigured)
-            //{
-            //    optionsBuilder.UseLoggerFactory(MyLoggerFactory).UseSqlServer(this.Configuration.GetConnectionString("DBContext"));
-            //}
+            //optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=Test;User ID=sa;Password=sa;MultipleActiveResultSets=true");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseLoggerFactory(MyLoggerFactory).UseSqlServer("Data Source=.;Initial Catalog=Test;User ID=sa;Password=sa;MultipleActiveResultSets=true");
+            }
 
             base.OnConfiguring(optionsBuilder);
         }

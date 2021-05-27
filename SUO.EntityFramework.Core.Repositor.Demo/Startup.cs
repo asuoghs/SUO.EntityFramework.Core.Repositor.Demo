@@ -29,11 +29,10 @@ namespace SUO.EntityFramework.Core.Repositor.Demo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-             
 
-            services.AddTransient(typeof(DatabaseFactory<MyContext>), typeof(IDbContextFactory));
+            services.AddTransient(typeof(IDbContextFactory), typeof(DatabaseFactory<MyContext>));
             //注册通用数据仓储
-            services.AddTransient(typeof(BaseRepository<,>), typeof(IBaseRepository<,>));
+            services.AddTransient(typeof(IBaseRepository<,>), typeof(BaseRepository<,>));
 
         }
 
