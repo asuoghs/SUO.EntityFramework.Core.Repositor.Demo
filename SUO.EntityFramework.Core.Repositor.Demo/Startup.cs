@@ -29,10 +29,8 @@ namespace SUO.EntityFramework.Core.Repositor.Demo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
-            services.AddTransient(typeof(IDbContextFactory), typeof(DatabaseFactory<MyContext>));
-            //注册通用数据仓储
-            services.AddTransient(typeof(IBaseRepository<,>), typeof(BaseRepository<,>));
+            services.RegisterServiceCollection<MyContext>();
+            
 
         }
 
