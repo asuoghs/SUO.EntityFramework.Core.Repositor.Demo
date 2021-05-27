@@ -4,6 +4,9 @@ namespace SUO.EntityFramework.Core.Repositor.Demo
 {
     public class WeatherForecast
     {
+        /// <summary>
+        /// ÈÕÆÚ
+        /// </summary>
         public DateTime Date { get; set; }
 
         public int TemperatureC { get; set; }

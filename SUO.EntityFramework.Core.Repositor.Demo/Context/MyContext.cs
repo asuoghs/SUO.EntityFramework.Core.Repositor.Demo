@@ -6,8 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Debug;
-using SUO.EntityFramework.Core.Repositor.Demo.Model;
+ 
 using SUO.EntityFramework.Core.Repository;
+using SUO.Model;
 
 namespace SUO.EntityFramework.Core.Repositor.Demo.Context
 {

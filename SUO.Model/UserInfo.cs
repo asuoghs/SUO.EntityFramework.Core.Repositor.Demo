@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 using SUO.EntityFramework.Core.Repository.EntityInterface;
 
-namespace SUO.EntityFramework.Core.Repositor.Demo.Model
+namespace SUO.Model
 {
-    public class UserInfo : PrimaryKeyGuid,ISoftDelete
+    public class UserInfo : PrimaryKeyGuid, ISoftDelete
     {
+
         public string UserName { get; set; }
         public DateTime? DeletedDate { get; set; }
         public string DeletedUser { get; set; }
@@ -19,7 +18,7 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Model
     }
 
 
-    public class UserInfoDetailed: PrimaryKeyGuid
+    public class UserInfoDetailed : PrimaryKeyGuid
     {
 
         public int Age { get; set; }

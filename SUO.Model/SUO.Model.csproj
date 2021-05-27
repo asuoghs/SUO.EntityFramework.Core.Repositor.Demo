@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath></OutputPath>
+    <DocumentationFile>E:\GitHub\SUO.EntityFramework.Core.Repositor.Demo\SUO.EntityFramework.Core.Repositor.Demo\bin\Debug\netcoreapp3.1\SUO.Model.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SUO.EntityFramework.Core.Repository" Version="0.1.7.3" />
+  </ItemGroup>
+
+</Project>

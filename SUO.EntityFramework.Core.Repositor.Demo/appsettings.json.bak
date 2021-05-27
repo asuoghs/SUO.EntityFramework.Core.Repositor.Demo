@@ -1,0 +1,41 @@
+{
+  "Data": "LineZero",
+  "ConnectionStrings": {
+    "DefaultConnection": "数据库1",
+    "DevConnection": "数据库2"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "Swagger": {
+    "SwaggerModel": [
+      {
+        "SwaggerDocName": "OTHERINTERFACE",
+        "Title": "其它"
+      },
+      {
+        "SwaggerDocName": "USER",
+        "Title": "用户管理"
+      },
+      {
+        "SwaggerDocName": "ROLEE",
+        "Title": "权限管理"
+      }
+    ],
+    "SwaggerFile": [
+      {
+        "FilePath": "E:\\GitHub\\SUO.EntityFramework.Core.Repositor.Demo\\SUO.EntityFramework.Core.Repositor.Demo\\doc\\SUO.EntityFramework.Core.Repositor.Demo.xml",
+        "IsControllor": true
+      },
+      {
+        "FilePath": "E:\\GitHub\\SUO.EntityFramework.Core.Repositor.Demo\\SUO.EntityFramework.Core.Repositor.Demo\\doc\\SUO.Model.xml",
+        "IsControllor": false
+      }
+    ]
+  }
+}

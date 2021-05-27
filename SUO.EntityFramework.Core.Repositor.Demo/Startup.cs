@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -13,14 +14,22 @@ using Microsoft.Extensions.Logging;
 using SUO.EntityFramework.Core.Repositor.Demo.Context;
 using SUO.EntityFramework.Core.Repository;
 using SUO.EntityFramework.Core.Repository.Interface;
+using SUO.Swagger;
 
 namespace SUO.EntityFramework.Core.Repositor.Demo
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
         {
-            Configuration = configuration;
+           // Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                //.AddJsonFile("autofac.json")//读取autofac.json文件
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -30,7 +39,17 @@ namespace SUO.EntityFramework.Core.Repositor.Demo
         {
             services.AddControllers();
             services.RegisterServiceCollection<MyContext>();
-            
+
+            var data = Configuration["Data"];
+            //两种方式读取
+            var defaultcon = Configuration.GetConnectionString("DefaultConnection");
+            var devcon = Configuration["ConnectionStrings:DevConnection"];
+
+
+            List<SwaggerDoc> swaggerModels = Configuration.GetSection("Swagger:SwaggerDoc").Get<List<SwaggerDoc>>();
+            List<SwaggerFile> swaggerFiles = Configuration.GetSection("Swagger:SwaggerFile").Get<List<SwaggerFile>>();
+            swaggerFiles.ForEach(a => a.FilePath=Path.Combine(AppContext.BaseDirectory, a.FilePath));
+            services.SwaggerConfigureServices(swaggerModels, swaggerFiles, null);
 
         }
 
@@ -41,7 +60,7 @@ namespace SUO.EntityFramework.Core.Repositor.Demo
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.SwaggerConfigure();
             app.UseHttpsRedirection();
 
             app.UseRouting();
