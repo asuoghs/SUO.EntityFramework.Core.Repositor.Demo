@@ -1,2 +1,2 @@
-# SUO.EntityFramework.Core.Repositor.Demoy
-SUO.EntityFramework.Core.Repositor.Demoy 调用示例
+# SUO.EntityFramework.Core.Repositor.Demo
+SUO.EntityFramework.Core.Repositor.Demo 调用示例
