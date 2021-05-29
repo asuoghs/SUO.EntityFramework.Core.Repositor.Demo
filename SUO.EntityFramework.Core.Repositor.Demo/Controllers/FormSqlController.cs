@@ -34,8 +34,8 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Controllers
         public ActionResult FromSqlList()
         {
             string name = "111";
-            FormattableString message = $"  select [UserInfo].*,UserInfoDetailed.Age,UserInfoDetailed.Email from [UserInfo] inner join [UserInfoDetailed] on userinfo.[UserInfoDetailedId]=[UserInfoDetailed].id {name} ";
-            var s= message.ToString();
+            FormattableString message = $"  select [UserInfo].*,UserInfoDetailed.Age,UserInfoDetailed.Email from [UserInfo] inner join [UserInfoDetailed] on userinfo.[UserInfoDetailedId]=[UserInfoDetailed].id ";
+          var s=  _userRepository.Page(a=>true, "DeletedDate asc", 1, 3).ToList();
             return Json(_userRepository.FromSqlList(message));
         }
 
