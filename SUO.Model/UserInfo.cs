@@ -12,9 +12,14 @@ namespace SUO.Model
         public DateTime? DeletedDate { get; set; }
         public string DeletedUser { get; set; }
         public bool IsDeleted { get; set; }
-
-
+        public Guid UserInfoDetailedId { get; set; }
+ 
         public virtual UserInfoDetailed UserInfoDetailed { get; set; }
+    }
+
+    public class UserInfos : UserInfo
+    {
+        public int Age { get; set; }
     }
 
 
