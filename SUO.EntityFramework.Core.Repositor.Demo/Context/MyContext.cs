@@ -18,8 +18,7 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Context
     public class MyContext : AbstractDbContext
     {
         public static readonly LoggerFactory MyLoggerFactory = new LoggerFactory(new[] {
-            new DebugLoggerProvider()
-        });
+            new DebugLoggerProvider()        });
 
         //public static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder =>
         //{

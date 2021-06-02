@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization.Internal;
+using SUO.Common.extension;
 using SUO.EntityFramework.Core.Repository;
 using SUO.Model;
 using SUO.Swagger.Attribute;
@@ -64,7 +65,7 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Controllers
         {
             UserInfo u = _userRepository.Single(a=>a.Id==id);
             u.UserName = name;
-
+             
             //UserInfo u = _userRepository.SingleAsNoTracking(a => a.Id == id);
             //u = new UserInfo()
             //{
@@ -77,6 +78,20 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Controllers
             //};
             //u.UserName = name;
             //_userRepository.Update(u);
+            this._userRepository.Commit();
+            return Json(u);
+        }
+
+        /// <summary>
+        /// 单个更新
+        /// </summary>
+        /// <returns></returns>
+        [Route("UpdateSFrom")]
+        [HttpPost]
+        public ActionResult UpdateSFrom(UserInfoDto model)
+        {
+            UserInfo u = _userRepository.Single(a => a.Id == model.Id);
+            u.ToTModelFromM(model);
             this._userRepository.Commit();
             return Json(u);
         }

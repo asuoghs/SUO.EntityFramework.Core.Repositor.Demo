@@ -22,6 +22,12 @@ namespace SUO.Model
         public int Age { get; set; }
     }
 
+    public class UserInfoDto 
+    {
+        public Guid Id { get; set; }
+        public string UserName { get; set; }
+    }
+
 
     public class UserInfoDetailed : PrimaryKeyGuid
     {
