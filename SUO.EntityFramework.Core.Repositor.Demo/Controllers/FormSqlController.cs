@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using SUO.EntityFramework.Core.Repository;
 using SUO.Model;
 using SUO.Swagger.Attribute;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,7 +38,10 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Controllers
             string name = "111";
             FormattableString message = $"  select [UserInfo].*,UserInfoDetailed.Age,UserInfoDetailed.Email from [UserInfo] inner join [UserInfoDetailed] on userinfo.[UserInfoDetailedId]=[UserInfoDetailed].id ";
           var s=  _userRepository.Page(a=>true, "DeletedDate asc", 1, 3).ToList();
-            return Json(_userRepository.FromSqlList(message));
+            return Json(_userRepository.FromSqlQueryable(message).ProjectTo<UserInfos>(new MapperConfiguration(cfg => cfg.CreateMap<UserInfos, UserInfo>())).Select(a=>new UserInfos()
+            {
+                Age = a.UserInfoDetailed.Age
+            }));
         }
 
         /// <summary>
