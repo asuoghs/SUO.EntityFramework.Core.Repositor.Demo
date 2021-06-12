@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using netcorewebapi.Controllers;
 using SUO.EntityFramework.Core.Repositor.Demo.Context;
 using SUO.EntityFramework.Core.Repository;
 using SUO.EntityFramework.Core.Repository.Interface;
@@ -38,7 +39,33 @@ namespace SUO.EntityFramework.Core.Repositor.Demo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.RegisterServiceCollection<MyContext>();
+
+            services.RegisterServiceCollection(typeof(MyContext), typeof(My01Context));
+
+            #region 测试依赖注入
+
+            //services.AddSingleton<IOperationSingleton>(new OperationTest(new Guid()));
+            //services.AddSingleton(typeof(IOperationSingleton), new OperationTest(new Guid()));
+            //services.AddSingleton(typeof(IOperationSingleton), a =>
+            //{
+            //    return new OperationTest(new Guid());
+            //});
+            //services.AddSingleton<ABC, ABC>();
+            //services.BuildServiceProvider().GetService<ABC>(); //注册服务
+
+            //services.AddTransient(typeof(IOperationSingleton), a =>
+            //{
+            //    return new OperationTest(new Guid());
+            //});
+
+            //services.AddScoped(typeof(IOperationSingleton), a =>
+            //{
+            //    return new OperationTest(Guid.NewGuid());
+            //});
+            services.AddScoped<IOperationScoped, OperationTest>();
+            services.AddTransient<IOperationTransient, OperationTest>();
+            services.AddTransient<ABC, ABC>();
+            #endregion
 
             var data = Configuration["Data"];
             //两种方式读取

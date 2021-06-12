@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization.Internal;
 using SUO.Common.extension;
+using SUO.EntityFramework.Core.Repositor.Demo.Context;
+
 using SUO.EntityFramework.Core.Repository;
 using SUO.Model;
 using SUO.Swagger.Attribute;
@@ -21,8 +23,8 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Controllers
     [Route("[controller]")]
     public class UpdateController : Controller
     {
-        private readonly IBaseRepository<UserInfo, Guid> _userRepository;
-        public UpdateController(IBaseRepository<UserInfo, Guid> _userRepository)
+        private readonly IBaseRepository<UserInfo, Guid, MyContext> _userRepository;
+        public UpdateController(IBaseRepository<UserInfo, Guid, MyContext> _userRepository)
         {
             this._userRepository = _userRepository;
         }
@@ -91,7 +93,7 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Controllers
         public ActionResult UpdateSFrom(UserInfoDto model)
         {
             UserInfo u = _userRepository.Single(a => a.Id == model.Id);
-            u.ToTModelFromM(model);
+            u.ToMapModel(model);
             this._userRepository.Commit();
             return Json(u);
         }

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SUO.EntityFramework.Core.Repository;
-using SUO.Model;
 using SUO.Swagger.Attribute;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using SUO.EntityFramework.Core.Repositor.Demo.Context;
+using SUO.Model;
+
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,8 +23,8 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Controllers
     [Route("[controller]")]
     public class FormSqlController : Controller
     {
-        private readonly IBaseRepository<UserInfo, Guid> _userRepository;
-        public FormSqlController(IBaseRepository<UserInfo, Guid> _userRepository)
+        private readonly IBaseRepository<UserInfo, Guid, MyContext> _userRepository;
+        public FormSqlController(IBaseRepository<UserInfo, Guid, MyContext> _userRepository)
         {
             this._userRepository = _userRepository;
         }

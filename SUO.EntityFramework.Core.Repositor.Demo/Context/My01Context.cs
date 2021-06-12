@@ -15,7 +15,7 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Context
     /// <summary>
     /// EF Core 上下文
     /// </summary>
-    public class MyContext : AbstractDbContext
+    public class My01Context : AbstractDbContext
     {
         public static readonly LoggerFactory MyLoggerFactory = new LoggerFactory(new[] {
             new DebugLoggerProvider()        });
@@ -25,11 +25,11 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Context
         //    builder.AddFilter((category, level) => category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information).AddConsole();
         //});
 
-        public MyContext()
+        public My01Context()
         {
 
         }
-        public MyContext(DbContextOptions<MyContext> options)
+        public My01Context(DbContextOptions<MyContext> options)
             : base(options)
         {
             // Database.EnsureCreated();
@@ -48,7 +48,7 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Context
             //optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=Test;User ID=sa;Password=sa;MultipleActiveResultSets=true");
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseLoggerFactory(MyLoggerFactory).UseSqlServer("Data Source=.;Initial Catalog=Test;User ID=sa;Password=sa;MultipleActiveResultSets=true");
+                optionsBuilder.UseLoggerFactory(MyLoggerFactory).UseSqlServer("Data Source=.;Initial Catalog=LoadTest2010;User ID=sa;Password=sa;MultipleActiveResultSets=true");
             }
 
             base.OnConfiguring(optionsBuilder);

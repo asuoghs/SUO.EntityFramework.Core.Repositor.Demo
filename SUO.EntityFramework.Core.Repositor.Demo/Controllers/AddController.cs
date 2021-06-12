@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SUO.EntityFramework.Core.Repositor.Demo.Context;
+
 using SUO.EntityFramework.Core.Repository;
 using SUO.Model;
 using SUO.Swagger.Attribute;
@@ -18,10 +20,15 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Controllers
     [Route("[controller]")]
     public class AddController : Controller
     {
-        private readonly IBaseRepository<UserInfo, Guid> _userRepository;
-        public AddController(IBaseRepository<UserInfo, Guid> _userRepository)
+        private readonly IBaseRepository<UserInfo, Guid,MyContext> _userRepository;
+
+        private readonly IBaseRepository<UserInfo, Guid, My01Context> _user01Repository;
+
+
+        public AddController(IBaseRepository<UserInfo, Guid, MyContext> _userRepository, IBaseRepository<UserInfo, Guid, My01Context> _user01Repository)
         {
             this._userRepository = _userRepository;
+            this._user01Repository = _user01Repository;
         }
         /// <summary>
         /// 单个添加
@@ -36,6 +43,21 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Controllers
             UserInfo u = _userRepository.Add(new UserInfo()
                 { Id = id, UserName = "张三", UserInfoDetailed = new UserInfoDetailed() { Id = id, Age = 11 } });
             _userRepository.Commit();
+            return Json(u);
+        }
+        /// <summary>
+        /// 单个添加Add01
+        /// </summary>
+        /// <returns></returns>
+        [Route("Add01")]
+        [ApiGroup("ADD")]
+        [HttpGet]
+        public ActionResult Add01()
+        {
+            Guid id = new Guid();
+            UserInfo u = _user01Repository.Add(new UserInfo()
+                { Id = id, UserName = "张三", UserInfoDetailed = new UserInfoDetailed() { Id = id, Age = 11 } });
+            _user01Repository.Commit();
             return Json(u);
         }
         /// <summary>

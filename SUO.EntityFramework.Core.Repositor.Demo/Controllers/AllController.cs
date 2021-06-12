@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SUO.EntityFramework.Core.Repositor.Demo.Context;
+
 using SUO.EntityFramework.Core.Repository;
 using SUO.Model;
 using SUO.Swagger.Attribute;
@@ -19,8 +21,8 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Controllers
     [Route("[controller]")]
     public class AllController : Controller
     {
-        private readonly IBaseRepository<UserInfo, Guid> _userRepository;
-        public AllController(IBaseRepository<UserInfo, Guid> _userRepository)
+        private readonly IBaseRepository<UserInfo, Guid, MyContext> _userRepository;
+        public AllController(IBaseRepository<UserInfo, Guid, MyContext> _userRepository)
         {
             this._userRepository = _userRepository;
         }

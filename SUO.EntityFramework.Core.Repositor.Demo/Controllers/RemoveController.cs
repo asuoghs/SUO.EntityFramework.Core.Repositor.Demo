@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization.Internal;
+using SUO.EntityFramework.Core.Repositor.Demo.Context;
+
 using SUO.EntityFramework.Core.Repository;
 using SUO.Model;
 using SUO.Swagger.Attribute;
@@ -20,8 +22,8 @@ namespace SUO.EntityFramework.Core.Repositor.Demo.Controllers
     [Route("[controller]")]
     public class RemoveController : Controller
     {
-        private readonly IBaseRepository<UserInfo, Guid> _userRepository;
-        public RemoveController(IBaseRepository<UserInfo, Guid> _userRepository)
+        private readonly IBaseRepository<UserInfo, Guid, MyContext> _userRepository;
+        public RemoveController(IBaseRepository<UserInfo, Guid, MyContext> _userRepository)
         {
             this._userRepository = _userRepository;
         }
